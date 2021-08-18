@@ -66,6 +66,42 @@
     return [mutableArray copy];
 }
 
+/**
+ 思想来源：插入排序的优化。在插入排序里，如果靠后的数字较小，它来到前面就得交换多次。「希尔排序」改进了这种做法。带间隔地使用插入排序，直到最后「间隔」为1的时候，就是标准的「插入排序」，此时数组里的元素已经「几乎有序」了；
+
+ 希尔排序是基于插入排序的以下两点性质而提出改进方法的：
+ 插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率
+ 但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位
+ */
+- (NSArray *)shellSort:(NSArray *)array {
+    NSMutableArray *mutableArray = [array mutableCopy];
+    int arrayLength = (int)mutableArray.count;
+    // 使用 Knuth 增量序列，找增量的最大值
+    int h = 1;
+    while (3 * h + 1 < arrayLength) {
+        h = 3 * h + 1;
+    }
+    while (h >= 1) {
+        for (int i = h; i < arrayLength; i++) {
+            for (int j = i; j >= h && [[mutableArray objectAtIndex:j] intValue] < [[mutableArray objectAtIndex:j - h] intValue]; j -= h) {
+                [mutableArray exchangeObjectAtIndex:j withObjectAtIndex:j - h];
+            }
+        }
+        h = h / 3;
+    }
+    return [mutableArray copy];
+}
+
+/**
+ 基本思路：借助额外空间，合并两个有序数组，得到更长的有序数组。
+ */
+- (NSArray *)mergeSort:(NSArray *)array {
+    NSMutableArray *mutableArray = [array mutableCopy];
+    int arrayLength = (int)mutableArray.count;
+    
+    return [mutableArray copy];
+}
+
 - (void)swap:(NSMutableArray *)array index1:(int)x index2:(int)y {
     int temp = [[array objectAtIndex:x] intValue];
     [array replaceObjectAtIndex:x withObject:[array objectAtIndex:y]];

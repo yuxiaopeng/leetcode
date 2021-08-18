@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray *)bubbleSort:(NSArray *)array;
 - (NSArray *)selectionSort:(NSArray *)array;
 - (NSArray *)insertionSort:(NSArray *)array;
+- (NSArray *)shellSort:(NSArray *)array;
 
 @end
 
