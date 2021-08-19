@@ -22,8 +22,10 @@ int main(int argc, const char * argv[]) {
 //        NSArray *sortedArray = [sortAnArray bubbleSort:array];
 //        NSArray *sortedArray = [sortAnArray selectionSort:array];
 //        NSArray *sortedArray = [sortAnArray insertionSort:array];
-        NSArray *array = @[@5, @2, @3, @1, @0];
-        NSArray *sortedArray = [sortAnArray shellSort:array];
+//        NSArray *array = @[@5, @2, @3, @1, @0];
+//        NSArray *sortedArray = [sortAnArray shellSort:array];
+        NSArray *array = @[@9, @8, @7, @6, @5, @4, @3, @2, @1];
+        NSArray *sortedArray = [sortAnArray mergeSort:array];
         NSLog(@"bubble sorted array:%@", sortedArray);
     }
     return 0;

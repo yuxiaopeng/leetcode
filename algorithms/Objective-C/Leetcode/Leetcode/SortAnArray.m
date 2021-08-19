@@ -98,8 +98,55 @@
 - (NSArray *)mergeSort:(NSArray *)array {
     NSMutableArray *mutableArray = [array mutableCopy];
     int arrayLength = (int)mutableArray.count;
-    
+    NSMutableArray *temp = [NSMutableArray arrayWithCapacity:arrayLength];
+    [self sort:mutableArray left:0 right:arrayLength - 1 temp:temp];
     return [mutableArray copy];
+}
+
+- (void)sort:(NSMutableArray *)array left:(int)left right:(int)right temp:(NSMutableArray *)temp {
+    if (left < right) {
+        int mid = (left + right) / 2;
+        [self sort:array left:left right:mid temp:temp];
+        [self sort:array left:mid + 1 right:right temp:temp];
+        [self merge:array left:left mid:mid right:right temp:temp];
+    }
+}
+
+- (void)merge:(NSMutableArray *)array left:(int)left mid:(int)mid right:(int)right temp:(NSMutableArray *)temp {
+    int i = left;
+    int j = mid + 1;
+    int t = 0;
+    while (i <= mid && j <= right) {
+        if ([[array objectAtIndex:i] intValue] <= [[array objectAtIndex:j] intValue]) {
+            [temp insertObject:[array objectAtIndex:i++] atIndex:t++];
+        } else {
+            [temp insertObject:[array objectAtIndex:j++] atIndex:t++];
+        }
+    }
+    while (i <= mid) {
+        [temp insertObject:[array objectAtIndex:i++] atIndex:t++];
+    }
+    while (j <= right) {
+        [temp insertObject:[array objectAtIndex:j++] atIndex:t++];
+    }
+//    for (int k = left; k <= right; k++) {
+//        if (i == mid + 1) {
+//            [array insertObject:[temp objectAtIndex:j] atIndex:k];
+//            j++;
+//        } else if (j == right + 1) {
+//            [array insertObject:[temp objectAtIndex:j] atIndex:k];
+//            i++;
+//        } else if ([[temp objectAtIndex:i] intValue] <= [[temp objectAtIndex:j] intValue]) {
+//            [array insertObject:[temp objectAtIndex:i] atIndex:k];
+//            i++;
+//        } else {
+//            [array insertObject:[temp objectAtIndex:j] atIndex:k];
+//            j++;
+//        }
+//    }
+    while (left <= right) {
+        [array insertObject:[temp objectAtIndex:t++] atIndex:left++];
+    }
 }
 
 - (void)swap:(NSMutableArray *)array index1:(int)x index2:(int)y {
