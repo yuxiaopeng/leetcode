@@ -99,55 +99,47 @@
     NSMutableArray *mutableArray = [array mutableCopy];
     int arrayLength = (int)mutableArray.count;
     NSMutableArray *temp = [NSMutableArray arrayWithCapacity:arrayLength];
-    [self sort:mutableArray left:0 right:arrayLength - 1 temp:temp];
+    [self sort:mutableArray low:0 high:arrayLength - 1 temp:temp];
     return [mutableArray copy];
 }
 
-- (void)sort:(NSMutableArray *)array left:(int)left right:(int)right temp:(NSMutableArray *)temp {
-    if (left < right) {
-        int mid = (left + right) / 2;
-        [self sort:array left:left right:mid temp:temp];
-        [self sort:array left:mid + 1 right:right temp:temp];
-        [self merge:array left:left mid:mid right:right temp:temp];
+- (void)sort:(NSMutableArray *)array low:(int)low high:(int)high temp:(NSMutableArray *)temp {
+    if (low >= high) { // 递归跳出判断
+        return;
     }
+    int mid = (low + high) / 2; // 对数组进行二分
+    [self sort:array low:low high:mid temp:temp]; // 对左侧的分组进行递归二分，low为第一个元素索引，middle为最后一个元素索引
+    [self sort:array low:mid + 1 high:high temp:temp]; // 对右侧的分组进行递归二分，middle + 1为第一个元素的索引，high为最后一个元素的索引
+    [self merge:array low:low middel:mid high:high temp:temp]; // 对每个有序数组进行回归合并
 }
 
-- (void)merge:(NSMutableArray *)array left:(int)left mid:(int)mid right:(int)right temp:(NSMutableArray *)temp {
-    int i = left;
-    int j = mid + 1;
-    int t = 0;
-    while (i <= mid && j <= right) {
-        if ([[array objectAtIndex:i] intValue] <= [[array objectAtIndex:j] intValue]) {
-            [temp insertObject:[array objectAtIndex:i++] atIndex:t++];
-        } else {
-            [temp insertObject:[array objectAtIndex:j++] atIndex:t++];
-        }
+- (void)merge:(NSMutableArray *)array low:(int)low middel:(int)middle high:(int)high temp:(NSMutableArray *)temp {
+  for (int i = low; i <= high; i++) { // 将数组元素复制到临时数组
+      temp[i] = array[i];
+  }
+  
+  int leftIndex = low; // 左侧数组标记
+  int rightIndex = middle + 1; // 右侧数组标记
+  int currentIndex = low; // 比较完成后比较小的元素要放的位置标记
+
+  while (leftIndex <= middle && rightIndex <= high) {
+    if ([temp[leftIndex] compare:temp[rightIndex]] != NSOrderedDescending) {
+        array[currentIndex] = temp[leftIndex]; // 左侧标记的元素小于等于右侧标记的元素
+        currentIndex++;
+        leftIndex++;
+    } else { // 右侧标记的元素小于左侧标记的元素
+        array[currentIndex] = temp[rightIndex];
+        currentIndex++;
+        rightIndex++;
     }
-    while (i <= mid) {
-        [temp insertObject:[array objectAtIndex:i++] atIndex:t++];
+  }
+  
+  if (leftIndex <= middle) { // 如果完成后左侧数组有剩余
+     for (int i = 0; i <= middle - leftIndex; i++) {
+        array[currentIndex + i] = temp[leftIndex + i];
     }
-    while (j <= right) {
-        [temp insertObject:[array objectAtIndex:j++] atIndex:t++];
-    }
-//    for (int k = left; k <= right; k++) {
-//        if (i == mid + 1) {
-//            [array insertObject:[temp objectAtIndex:j] atIndex:k];
-//            j++;
-//        } else if (j == right + 1) {
-//            [array insertObject:[temp objectAtIndex:j] atIndex:k];
-//            i++;
-//        } else if ([[temp objectAtIndex:i] intValue] <= [[temp objectAtIndex:j] intValue]) {
-//            [array insertObject:[temp objectAtIndex:i] atIndex:k];
-//            i++;
-//        } else {
-//            [array insertObject:[temp objectAtIndex:j] atIndex:k];
-//            j++;
-//        }
-//    }
-    while (left <= right) {
-        [array insertObject:[temp objectAtIndex:t++] atIndex:left++];
-    }
-}
+  }
+ }
 
 - (void)swap:(NSMutableArray *)array index1:(int)x index2:(int)y {
     int temp = [[array objectAtIndex:x] intValue];
