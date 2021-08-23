@@ -139,7 +139,41 @@
         array[currentIndex + i] = temp[leftIndex + i];
     }
   }
- }
+}
+
+/**
+    分捡、分裂、递归
+ */
+- (NSMutableArray *)quickSort:(NSMutableArray *)array left:(int)left right:(int)right {
+    if (left < right) {
+        int splitPoint = [self partition:array left:left right:right];
+        [self quickSort:array left:left right:splitPoint - 1];
+        [self quickSort:array left:splitPoint + 1 right:right];
+    }
+    return array;
+}
+
+- (int)partition:(NSMutableArray *)array left:(int)left right:(int)right {
+    int pivotValue = [array[left] intValue]; // 先选定第一个元素作为中位值
+    int leftMark = left + 1; // 左游标，向右移动
+    int rightMark = right; // 右游标，向左移动
+    BOOL done = NO;
+    while (!done) {
+        while (leftMark <= rightMark && [array[leftMark] intValue] <= pivotValue) { // 向右移动左游标
+            leftMark += 1;
+        }
+        while ([array[rightMark] intValue] >= pivotValue && rightMark >= leftMark) { // 向左移动右游标
+            rightMark -= 1;
+        }
+        if (rightMark < leftMark) { // 两标相错就结束移动
+            done = YES;
+        } else { // 左右标值交换
+            [array exchangeObjectAtIndex:leftMark withObjectAtIndex:rightMark];
+        }
+    }
+    [array exchangeObjectAtIndex:left withObjectAtIndex:rightMark]; // 中值就位
+    return rightMark; // 中值点，也就是分裂点
+}
 
 - (void)swap:(NSMutableArray *)array index1:(int)x index2:(int)y {
     int temp = [[array objectAtIndex:x] intValue];

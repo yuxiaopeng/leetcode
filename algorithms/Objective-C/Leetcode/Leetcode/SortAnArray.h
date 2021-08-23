@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray *)insertionSort:(NSArray *)array;
 - (NSArray *)shellSort:(NSArray *)array;
 - (NSArray *)mergeSort:(NSArray *)array;
+- (NSArray *)quickSort:(NSArray *)array left:(int)left right:(int)right;
 
 @end
 
