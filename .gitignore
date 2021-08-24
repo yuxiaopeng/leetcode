@@ -1,4 +1,10 @@
+
+# Xcode
+xcuserdata
 .metadata
+*.xcuserstate
+*.xcbkptlist
+
 # Compiled class file
 *.class
 
