@@ -175,6 +175,59 @@
     return rightMark; // 中值点，也就是分裂点
 }
 
+/**
+ 堆是一棵完全二叉树
+ parrent = (i - 1) / 2;
+ c1 = i * 2 + 1;
+ c2 = i * 2 + 2;
+ */
+- (void)heapify:(NSMutableArray *)tree n:(int)n i:(int)i {
+    if (i > n) {
+        return;
+    }
+    int c1 = 2 * i + 1; // 左子节点的index
+    int c2 = 2 * i + 2; // 右子节点的index
+    int max = i; // 最大值节点的index，默认先设置为父节点
+    if (c1 < n && tree[c1] > tree[max]) {
+        max = i;
+    }
+    if (c2 < n && tree[c2] > tree[max]) {
+        max = i;
+    }
+    if (max != i) {
+        [tree exchangeObjectAtIndex:max withObjectAtIndex:i];
+        [self heapify:tree n:n i:max];
+    }
+}
+
+/**
+ 构建堆：
+ 按照父节点倒序的方式一层一层构建
+ */
+- (void)buildHeap:(NSMutableArray *)tree n:(int)n {
+    int lastNode = n - 1;
+    int parent = (lastNode - 1) / 2;
+    int i;
+    for (i = parent; i >= 0; i--) {
+        [self heapify:tree n:n i:i];
+    }
+}
+
+/**
+ 1、先将一棵树构造成堆；
+ 2、将第一个节点与最后一个节点进行值交换；
+ 3、砍断最后一个节点；
+ 4、重复1-3；
+ */
+- (void)heapSort:(NSMutableArray *)tree n:(int)n {
+    [self buildHeap:tree n:n];
+    int i;
+    for (i = n - 1; i >= 0; i--) {
+        [tree exchangeObjectAtIndex:i withObjectAtIndex:0];
+        [self heapify:tree n:i i:0];
+    }
+}
+
 - (void)swap:(NSMutableArray *)array index1:(int)x index2:(int)y {
     int temp = [[array objectAtIndex:x] intValue];
     [array replaceObjectAtIndex:x withObject:[array objectAtIndex:y]];
