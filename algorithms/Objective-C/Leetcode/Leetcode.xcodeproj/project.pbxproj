@@ -10,6 +10,7 @@
 		D82FB7CC256D0C1B0024579F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D82FB7CB256D0C1B0024579F /* main.m */; };
 		D82FB7DD256D0D5E0024579F /* ReverseWordsString.m in Sources */ = {isa = PBXBuildFile; fileRef = D82FB7DC256D0D5E0024579F /* ReverseWordsString.m */; };
 		D8869C3726C549AF00F75C74 /* SortAnArray.m in Sources */ = {isa = PBXBuildFile; fileRef = D8869C3626C549AF00F75C74 /* SortAnArray.m */; };
+		D89FE2E126DB58F1008592CB /* BinarySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = D89FE2E026DB58F1008592CB /* BinarySearch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		D82FB7DC256D0D5E0024579F /* ReverseWordsString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReverseWordsString.m; sourceTree = "<group>"; };
 		D8869C3526C549AF00F75C74 /* SortAnArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SortAnArray.h; sourceTree = "<group>"; };
 		D8869C3626C549AF00F75C74 /* SortAnArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SortAnArray.m; sourceTree = "<group>"; };
+		D89FE2DF26DB58F1008592CB /* BinarySearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BinarySearch.h; sourceTree = "<group>"; };
+		D89FE2E026DB58F1008592CB /* BinarySearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BinarySearch.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				D82FB7DC256D0D5E0024579F /* ReverseWordsString.m */,
 				D8869C3526C549AF00F75C74 /* SortAnArray.h */,
 				D8869C3626C549AF00F75C74 /* SortAnArray.m */,
+				D89FE2DF26DB58F1008592CB /* BinarySearch.h */,
+				D89FE2E026DB58F1008592CB /* BinarySearch.m */,
 			);
 			path = Leetcode;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D89FE2E126DB58F1008592CB /* BinarySearch.m in Sources */,
 				D8869C3726C549AF00F75C74 /* SortAnArray.m in Sources */,
 				D82FB7CC256D0C1B0024579F /* main.m in Sources */,
 				D82FB7DD256D0D5E0024579F /* ReverseWordsString.m in Sources */,

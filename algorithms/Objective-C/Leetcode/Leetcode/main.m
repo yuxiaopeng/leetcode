@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "ReverseWordsString.h"
 #import "SortAnArray.h"
+#import "BinarySearch.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -26,9 +27,13 @@ int main(int argc, const char * argv[]) {
 //        NSArray *sortedArray = [sortAnArray shellSort:array];
 //        NSArray *array = @[@9, @8, @7, @6, @5, @4, @3, @2, @1];
 //        NSArray *sortedArray = [sortAnArray mergeSort:array];
-        NSMutableArray *array = [@[@54, @26, @93, @17, @77, @31, @44, @55, @20] mutableCopy];
-        NSArray *sortedArray = [sortAnArray quickSort:array left:0 right:(int)array.count - 1];
-        NSLog(@"bubble sorted array:%@", sortedArray);
+//        NSMutableArray *array = [@[@54, @26, @93, @17, @77, @31, @44, @55, @20] mutableCopy];
+//        NSArray *sortedArray = [sortAnArray quickSort:array left:0 right:(int)array.count - 1];
+//        NSLog(@"bubble sorted array:%@", sortedArray);
+        NSArray *array = @[@26, @37, @54, @55, @77, @82, @85, @95, @99];
+        BinarySearch *binarySearch = [[BinarySearch alloc] init];
+        int index = [binarySearch search:array target:95];
+        NSLog(@"the 55 in the array %d index position", index);
     }
     return 0;
 }
